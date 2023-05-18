@@ -1,0 +1,214 @@
+<button class="logoutBtn" (click)="logout()">👋🏻 Logout</button>
+
+<div *ngIf="selectOptionPage == 'null'" class="buttonsDiv">
+    <button (click)="openProductsDetails()">עצי מוצר</button>
+    <button (click)="openOffers()">הצעות מחיר</button>
+</div>
+
+
+<div *ngIf="selectOptionPage == 'productDetails'" class="displayButtons">
+    <span class="toLeft"><button (click)="selectOptionPage = 'null'; tableCss = 'none'" class="btnClassingCss">←
+            back</button></span><br />
+
+    <select #teams (change)="onSelected(teams.value)">
+        <option default>Pick a item</option>
+        <option>TX-83</option>
+        <option>Ma365</option>
+        <option>EL20M8</option>
+        <option>RZ864</option>
+        <option>BW123</option>
+    </select>
+
+</div>
+
+<div class="{{tableCss}}">
+    <table *ngIf="selectedTeam != ''">
+        <thead>
+            <tr *ngIf="selectedTeam != 'Pick a item'">
+                <th>Products Names</th>
+                <th>Qty</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="selectedTeam == 'TX-83'">
+                <td>{{products[0].productName}}</td>
+                <td>3</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'RZ864'">
+                <td>{{products[0].productName}}</td>
+                <td>2</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'Ma365'">
+                <td>{{products[1].productName}}</td>
+                <td>5</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'BW123'">
+                <td>{{products[1].productName}}</td>
+                <td>2</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'Ma365'">
+                <td>{{products[2].productName}}</td>
+                <td>2</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'BW123'">
+                <td>{{products[2].productName}}</td>
+                <td>1</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'TX-83'">
+                <td>{{products[3].productName}}</td>
+                <td>5</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'RZ864'">
+                <td>{{products[4].productName}}</td>
+                <td>3</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'EL20M8'">
+                <td>{{products[4].productName}}</td>
+                <td>2</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'TX-83'">
+                <td>{{products[5].productName}}</td>
+                <td>2</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'RZ864'">
+                <td>{{products[5].productName}}</td>
+                <td>5</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'TX-83'">
+                <td>{{products[6].productName}}</td>
+                <td>1</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'EL20M8'">
+                <td>{{products[7].productName}}</td>
+                <td>5</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'BW123'">
+                <td>{{products[7].productName}}</td>
+                <td>5</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'EL20M8'">
+                <td>{{products[8].productName}}</td>
+                <td>7</td>
+            </tr>
+            <tr *ngIf="selectedTeam == 'Ma365'">
+                <td>{{products[9].productName}}</td>
+                <td>4</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="selectOptionPage == 'newOffer'">
+    <span class="toLeft80"><button (click)="selectOptionPage = 'null'; tableCss = 'none'"
+            class="btnClassingCss">←back</button>
+        <button class="openBid" (click)="showAllOffers()">Show All Offers</button>
+        <button class="openBid" (click)="openNewOffer()">Open New Offer</button></span>
+    <br /><br />
+
+    <div *ngIf="displayNone != 'none'">
+        <div class="{{displayNone}}">
+            <table *ngIf="tableDisplay == true">
+                <thead>
+                    <tr>
+                        <th>Offer Number</th>
+                        <th>Offer Items</th>
+                        <th>Create PDF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let customerOrder of tableOrders ">
+                        <td>{{customerOrder.orderId}}</td>
+                        <td>{{customerOrder.itemName}}</td>
+                        <td>
+                            <div>
+                                <button [disabled]="isDisabled" (click)="download(customerOrder.orderId)">⏍</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="tableDisplay == false && tableDisplay != null" class="toRight">אין הצעות קיימות.</div>
+
+</div>
+
+<form *ngIf="openForm == 'show'" (ngSubmit)="addNewOffer()" ngNativeValidate>
+    <div class="firstDivForm"><span>
+            <label>Country Name:</label>
+            <select name="countryName" [(ngModel)]="countryName" required class="selectClassingCss">
+                <option selected disabled value="Select country...">Select country...</option>
+                <option selected>Israel</option>
+                <option selected>India</option>
+                <option selected>U.S.A.</option>
+                <option selected>France</option>
+                <option selected>Italy</option>
+            </select></span><br>
+        <label>Customer Name:</label>
+        <input type="text" name="customerName" [(ngModel)]="customerName" required class="selectClassingCss"><br>
+        <label>Marketing Man Name:</label>
+        <select name="marketingMan" [(ngModel)]="marketingMan" required class="selectClassingCss">
+            <option selected disabled value="Select Marketing Man...">Select Marketing Man...</option>
+            <option selected>Idan</option>
+            <option selected>Hen</option>
+            <option selected>Yaccov</option>
+            <option selected>Sara</option>
+        </select><br>
+    </div><br /><br />
+    <div class="formCenter">
+        <div>
+            <label>Product Name:</label>
+            <input name="currentItemName1" type="text" [(ngModel)]="currentItemName1" disabled="">
+            <br />
+            <label>Quantity:</label>
+            <input type="number" name="countItemStock1" min="0" (change)="checkChanges()"
+                [(ngModel)]="countItemStock1" /><br />
+
+            <label>Product Name:</label>
+            <input name="currentItemName2" type="text" [(ngModel)]="currentItemName2" disabled="">
+            <br>
+            <label>Quantity:</label>
+            <input type="number" name="countItemStock2" min="0" (change)="checkChanges()" [(ngModel)]="countItemStock2" /><br />
+
+            <label>Product Name:</label>
+            <input name="currentItemName3" type="text" [(ngModel)]="currentItemName3" disabled="">
+            <br>
+            <label>Quantity:</label>
+            <input type="number" name="countItemStock3" min="0" (change)="checkChanges()" [(ngModel)]="countItemStock3" /><br />
+
+            <label>Product Name:</label>
+            <input name="currentItemName4" type="text" [(ngModel)]="currentItemName4" disabled="">
+            <br>
+            <label>Quantity:</label>
+            <input type="number" name="countItemStock4" min="0" (change)="checkChanges()" [(ngModel)]="countItemStock4" /><br />
+            <label>Product Name:</label>
+            <input name="currentItemName5" type="text" [(ngModel)]="currentItemName5" disabled="">
+            <br>
+            <label>Quantity:</label>
+            <input type="number" name="countItemStock5" min="0" (change)="checkChanges()" [(ngModel)]="countItemStock5" /><br />
+        </div>
+        <div>
+            <label>Price: </label>
+            <input type="number" name="currentPrice" min="1" max="200000" [(ngModel)]="currentPrice" required
+                disabled="" #supplierName="ngModel" /><br />
+
+            <label>Pure profit: </label>
+            <input type="number" (change)="checkChanges()" [value]="pureProfit" name="pureProfit" min="0" max="100"
+                [(ngModel)]="pureProfit" required #pureProfit1="ngModel" /><br />
+
+            <label>Unpredictable:</label>
+            <input type="number" (change)="checkChanges()" name="unpredictable" min="0" max="100"
+                [(ngModel)]="unpredictable" required #unpredictable1="ngModel" /><br />
+
+            <label>Management:</label>
+            <input type="number" (change)="checkChanges()" name="management" min="0" max="100" [(ngModel)]="management"
+                required #management1="ngModel" /><br />
+
+            <label>Total Price: </label>
+            <input type="number" name="totalPrice" step="0.01" min="1" max="200000" [(ngModel)]="totalPrice" required
+                #totalPrice1="ngModel" /><br /><br />
+        </div>
+    </div>
+    <br />
+    <button>send</button>
+</form>

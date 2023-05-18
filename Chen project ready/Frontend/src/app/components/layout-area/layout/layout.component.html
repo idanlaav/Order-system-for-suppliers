@@ -1,0 +1,17 @@
+<div class="layout">
+    
+    <header>
+        <div class="subject">
+            Cost System
+        </div>
+        <div class="details">
+            <div class="welcomeMessage toLeft" *ngIf="userFullName != null">Hello {{userFullName}}</div>
+        </div>
+    </header>
+    
+    <main><router-outlet></router-outlet></main>
+    
+    <footer>
+    </footer>
+
+</div>

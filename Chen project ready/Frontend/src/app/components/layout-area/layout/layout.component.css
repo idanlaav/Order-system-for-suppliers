@@ -1,0 +1,67 @@
+.layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.layout > header {
+    height: 12%;
+    color: black;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+.layout> footer {
+    height: 13%;
+    font-size: large;
+    font-weight: 600;
+}
+
+.layout > main {
+    flex: 1;
+    overflow: auto;
+    margin: 10px 5%;
+    border-radius: 5%;
+    /* background-image: linear-gradient(rgb(194, 217, 225), rgb(216, 219, 184)); */
+}
+
+.logo {
+    width: 20%;
+    height: 100%;
+}
+
+.subjectContactDetails {
+    color:rgb(0, 0, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.mainContactDetails {
+    color:rgb(0, 0, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.details {
+    margin-right: 5px;
+}
+
+.welcomeMessage {
+    margin-top: 10px;
+    font-size: 18px !important;
+    color: brown;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    background: none;
+}
+
+.toLeft {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.subject {
+    display: flex;
+    flex-direction: column;
+}
